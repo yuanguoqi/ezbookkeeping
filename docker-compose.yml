@@ -1,0 +1,16 @@
+services:
+  ezbookkeeping:
+    image: mayswind/ezbookkeeping:2.1.1
+    container_name: ezbookkeeping
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      EBK_CONF_PATH: /ezbookkeeping/conf/ezbookkeeping.ini
+    volumes:
+      - ./conf/ezbookkeeping.ini:/ezbookkeeping/conf/ezbookkeeping.ini:ro
+      - ./storage:/ezbookkeeping/storage
+      - ./data:/ezbookkeeping/data
+      - ./log:/ezbookkeeping/log
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
